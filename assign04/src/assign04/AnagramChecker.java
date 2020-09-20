@@ -30,13 +30,13 @@ public class AnagramChecker {
 			int j = i-1;
 			while( j >= 0 && Character.getNumericValue(inputString.charAt(i)) > Character.getNumericValue(tempVal.charAt(0))) //inserts the tempVal into the sorted string
 			{
+				resultString += tempVal.charAt(0);
+							
+					
 				
-				
-				
-					//resultString = resultString.substring(0, endIndex) + tempVal + resultString.substring(beginIndex, resultString.length());
-				}
 				j--;
 			}
+		}
 		
 		
 		return resultString;
@@ -48,7 +48,7 @@ public class AnagramChecker {
 	 * @param inputTArray
 	 * @param inputComp
 	 */
-	public static <T> void insertionSort(T[] tArray, Comparator<? super T> inputComp) throws NullPointerException
+	public static <T> void insertionSort(T[] tArray, Comparator<? super T> inputComp) 
 	{
 		
 	}
@@ -59,7 +59,7 @@ public class AnagramChecker {
 	 * @param secondInputString
 	 * @return
 	 */
-	public static boolean areAnagrams(String inputString, String secondInputString) throws NullPointerException
+	public static boolean areAnagrams(String inputString, String secondInputString) 
 	{
 		return false;
 	}
@@ -69,7 +69,7 @@ public class AnagramChecker {
 	 * @param inputStringArray
 	 * @return
 	 */
-	public static String[] getLargestAnagramGroup(String[] inputStringArray) throws NullPointerException
+	public static String[] getLargestAnagramGroup(String[] inputStringArray) 
 	{
 		return null;
 	}
@@ -79,7 +79,7 @@ public class AnagramChecker {
 	 * @param filename
 	 * @return
 	 */
-	public static String[] getLargestAnagramGroup(String filename) throws NullPointerException
+	public static String[] getLargestAnagramGroup(String filename) 
 	{
 		return null;
 	}
