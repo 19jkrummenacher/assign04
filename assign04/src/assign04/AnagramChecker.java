@@ -30,17 +30,14 @@ public class AnagramChecker {
 			int j = i-1;
 			while( j >= 0 && Character.getNumericValue(inputString.charAt(i)) > Character.getNumericValue(tempVal.charAt(0))) //inserts the tempVal into the sorted string
 			{
-				if()
-				{
-					
-				}
-				else 
-				{
-					resultString = resultString.substring(0, endIndex) + tempVal + resultString.substring(beginIndex, resultString.length());
+				
+				
+				
+					//resultString = resultString.substring(0, endIndex) + tempVal + resultString.substring(beginIndex, resultString.length());
 				}
 				j--;
 			}
-		}
+		
 		
 		return resultString;
 	}
