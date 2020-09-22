@@ -10,7 +10,7 @@ import java.util.Comparator;
 public class AnagramChecker {
 	
 	/**
-	 * sort accepts on input string sorts through
+	 * sort accepts on input String by breaking it up into chars and doing an insertion sort and them combining it together again.
 	 * @param inputString
 	 * @return resultString that's sorted
 	 */
@@ -36,7 +36,7 @@ public class AnagramChecker {
 	}
 	
 	/**
-	 * 
+	 * sort accepts an array of type T and a comparator for Type 
 	 * @param <T>
 	 * @param inputTArray
 	 * @param inputComp
