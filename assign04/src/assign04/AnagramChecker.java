@@ -20,26 +20,22 @@ public class AnagramChecker {
 			throw new NullPointerException();
 		
 		inputString = inputString.toLowerCase();
-		
-		String resultString = inputString.charAt(0) + "";
-		String tempVal;
+		char tempVal;
+		char[] charArray = inputString.toCharArray();
+		int j;
 		
 		for(int i = 1; i<inputString.length(); i++) // goes through every of the unsorted array except index 0(already sorted)
 		{
-			tempVal = inputString.charAt(i) + "";
-			int j = i-1;
-			while( j >= 0 && Character.getNumericValue(inputString.charAt(i)) > Character.getNumericValue(tempVal.charAt(0))) //inserts the tempVal into the sorted string
+			tempVal = charArray[i];
+			for(j = i-1; j>=0 && charArray[j] > tempVal; j--)
 			{
-				resultString += tempVal.charAt(0);
-							
-					
-				
-				j--;
+				charArray[j+1]=charArray[j];
 			}
+			charArray[j+1] = tempVal;
 		}
+		 
 		
-		
-		return resultString;
+		return new String(charArray);
 	}
 	
 	/**
@@ -61,7 +57,7 @@ public class AnagramChecker {
 	 */
 	public static boolean areAnagrams(String inputString, String secondInputString) 
 	{
-		return false;
+		return sort(inputString).equals(sort(secondInputString));
 	}
 	
 	/**
@@ -71,6 +67,7 @@ public class AnagramChecker {
 	 */
 	public static String[] getLargestAnagramGroup(String[] inputStringArray) 
 	{
+		
 		return null;
 	}
 	
@@ -86,7 +83,10 @@ public class AnagramChecker {
 	
 	public static void main(String[] args) 
 	{
+			System.out.println(sort("abc"));
 			System.out.println(sort("cba"));
+			System.out.println(sort("cbaABDA"));
+			System.out.println(sort("yourS"));
 	}
 
 //Insertion sort application
