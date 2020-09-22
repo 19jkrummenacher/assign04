@@ -17,7 +17,7 @@ class AnagramCheckerTester
 	@Test
 	void areAnagrams_EmptyString()
 	{
-		assertTrue();
+		
 	}
 
 }

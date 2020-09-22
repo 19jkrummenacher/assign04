@@ -60,7 +60,7 @@ public class AnagramChecker {
 	}
 	
 	/**
-	 * Checks whether the two given strings are anagrams or not.Returns truw if they are.
+	 * Checks whether the two given strings are anagrams or not.Returns true if they are.
 	 * @param inputString
 	 * @param secondInputString
 	 * @return
@@ -77,8 +77,13 @@ public class AnagramChecker {
 	 */
 	public static String[] getLargestAnagramGroup(String[] inputStringArray) 
 	{
-		
-		return null;
+		String [] copyTem =insertionSort(inputStringArray,);
+		String [] result= null;
+		for(int i = 0 ; i < copyTem.length;i++)
+		{
+			
+		}
+		return result;
 	}
 	
 	/**
