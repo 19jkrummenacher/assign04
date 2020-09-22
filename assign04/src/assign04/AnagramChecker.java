@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
  * 
- * @author Pratyush & Jonathan
+ * @author Dixit  & Krummenacher
  *
  */
 public class AnagramChecker {
@@ -19,20 +19,20 @@ public class AnagramChecker {
 		//Checks for empty Strings
 		if(inputString.equals(null))
 			throw new NullPointerException();
-		//Lowers the input string for comparsion
+		//Lowers the input string for comparison
 		inputString = inputString.toLowerCase();
-		char tempVal;
+		char targetVal;
 		char[] charArray = inputString.toCharArray();
 		int j;
 		
 		for(int i = 1; i<inputString.length(); i++) // goes through every of the unsorted array except index 0(already sorted)
 		{
-			tempVal = charArray[i];
-			for(j = i-1; j>=0 && charArray[j] > tempVal; j--)
+			targetVal = charArray[i];
+			for(j = i-1; j>=0 && charArray[j] > targetVal; j--)
 			{
 				charArray[j+1]=charArray[j];
 			}
-			charArray[j+1] = tempVal;
+			charArray[j+1] = targetVal;
 		}
 		 
 		
