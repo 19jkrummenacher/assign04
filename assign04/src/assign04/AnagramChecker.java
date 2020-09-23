@@ -78,24 +78,37 @@ public class AnagramChecker {
 	 */
 	public static String[] getLargestAnagramGroup(String[] inputStringArray) 
 	{
-		int result;
-		int valIndexer = 0;
+		ArrayList<String> resultList = new ArrayList<String>();
+		String[] result = null;
+		int max = 0;
+		int currentMax = 1;
 		
 		insertionSort(inputStringArray,(a, b) ->sort(a).compareTo(sort(b)));
-
-		for(int i = 1; i<inputStringArray.length; i++)
+		if(inputStringArray.length > 0)
 		{
-			if(areAnagrams(inputStringArray[i], inputStringArray[i-1]))
+			resultList.add(inputStringArray[0]);
+			for(int i = 1; i<inputStringArray.length; i++)
 			{
-				
-			}
-			else
-			{
-				valIndexer = i;
+				if(areAnagrams(inputStringArray[i], inputStringArray[i-1]))
+				{
+					currentMax++;
+					resultList.add(inputStringArray[i]);
+				}
+				else
+				{
+					if(currentMax > max)
+					{
+						max = currentMax;
+						System.out.println(resultList.toString());
+						result = (String[]) resultList.toArray();
+						resultList.clear();
+					}
+					currentMax = 0;
+				}
 			}
 		}
 		//result = {{"cat","act","cta"},{"at","ta"}};
-		return null;
+		return result;
 	}
 	
 	/**
@@ -121,6 +134,7 @@ public class AnagramChecker {
 			arr[2]="cbaABDA";
 			arr[3]="yourS";
 			arr[4]="anagrams";
+			System.out.println(getLargestAnagramGroup(arr) == null);
 	}
 
 //Insertion sort application
