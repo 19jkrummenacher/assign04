@@ -93,21 +93,22 @@ public class AnagramChecker {
 				{
 					currentMax++;
 					resultList.add(inputStringArray[i]);
+					resultList.add(inputStringArray[i-1]);
+					result = (String[]) resultList.toArray(new String[resultList.size()]);
+					
 				}
 				else
 				{
 					if(currentMax > max)
 					{
 						max = currentMax;
-						System.out.println(resultList.toString());
-						result = (String[]) resultList.toArray();
+						result = (String[]) resultList.toArray(new String[resultList.size()]);
 						resultList.clear();
 					}
 					currentMax = 0;
 				}
 			}
 		}
-		//result = {{"cat","act","cta"},{"at","ta"}};
 		return result;
 	}
 	
@@ -128,13 +129,14 @@ public class AnagramChecker {
 			System.out.println(sort("cbaABDA"));
 			System.out.println(sort("yourS"));
 			System.out.println(areAnagrams("RonaldReagan","Adarnlongera"));
-			String [] arr = new String[5];
+			String [] arr = new String[6];
 			arr[0]="cba";
 			arr[1]="abc";
 			arr[2]="cbaABDA";
 			arr[3]="yourS";
 			arr[4]="anagrams";
-			System.out.println(getLargestAnagramGroup(arr) == null);
+			arr[5]="bac";
+			System.out.println(getLargestAnagramGroup(arr).toString());
 	}
 
 //Insertion sort application
