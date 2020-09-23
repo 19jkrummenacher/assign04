@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class AnagramChecker {
 	
 	/**
-	 * sort accepts on input String by breaking it up into chars and doing an insertion sort and them combining it together again.
+	 * Using insertion sort , this method sorts an String lexicographically.
 	 * @param inputString
 	 * @return resultString that's sorted
 	 */
@@ -28,20 +28,20 @@ public class AnagramChecker {
 		inputString = inputString.toLowerCase();
 		char targetVal;
 		char[] charArray = inputString.toCharArray();
-		int j;
+		int loopCounter;
 		for (int index = 1; index < inputString.length(); index++) // goes through every of the unsorted array except															// index 0(already sorted)
 		{
 			targetVal = charArray[index];
-			for (j = index - 1; j >= 0 && charArray[j] > targetVal; j--) {
-				charArray[j + 1] = charArray[j];
+			for (loopCounter = index - 1; loopCounter >= 0 && charArray[loopCounter] > targetVal; loopCounter--) {
+				charArray[loopCounter + 1] = charArray[loopCounter];
 			}
-			charArray[j + 1] = targetVal;
+			charArray[loopCounter + 1] = targetVal;
 		}
 		return new String(charArray);
 	}
 	
 	/**
-	 * sort accepts an array of type T and a comparator for Type 
+	 * Sorts an generic array with insertion sort and uses Comparator object for comparison
 	 * @param <T>
 	 * @param inputTArray
 	 * @param inputComp
@@ -49,19 +49,17 @@ public class AnagramChecker {
 	public static <T> void insertionSort(T[] inputArr, Comparator<? super T> inputComp) 
 	{
 	T key;
-	int j;
-	for(int i=1; i<inputArr.length; i++)
+	int loopIndex;
+	for(int index=1; index<inputArr.length; index++)
 	{
-		key= inputArr[i];
+		key= inputArr[index];
 		
-		for(j= i-1; j>=0 && inputComp.compare(inputArr[j], key)> 0 ;j--)
+		for(loopIndex= index-1; loopIndex>=0 && inputComp.compare(inputArr[loopIndex], key)> 0 ;loopIndex--)
 		{
-			inputArr[j+1]=inputArr[j];
+			inputArr[loopIndex+1]=inputArr[loopIndex];
 		}
-		inputArr[j+1]=key;
-	}
-	System.out.println(inputArr.toString());
-		
+		inputArr[loopIndex+1]=key;
+	}	
 	}
 	
 	/**
@@ -76,14 +74,14 @@ public class AnagramChecker {
 	}
 	
 	/**
-	 * 
+	 * This method finds the largest group of anagrams in a Array of Strings. Returns an empty array if no anagrams are present.
 	 * @param inputStringArray
 	 * @return
 	 */
 	public static String[] getLargestAnagramGroup(String[] inputStringArray) 
 	{
 		ArrayList<String> resultList = new ArrayList<String>();
-		String[] result = null;
+		String[] result=null;
 		int max = 0;
 		int currentMax = 1;
 		
@@ -91,19 +89,19 @@ public class AnagramChecker {
 		
 		if(inputStringArray.length > 0)
 		{
-			for(int i = 0; i<inputStringArray.length-1; i++)
+			for(int index = 0; index<inputStringArray.length-1; index++)
 			{
-				if(areAnagrams(inputStringArray[i], inputStringArray[i+1]))
+				if(areAnagrams(inputStringArray[index], inputStringArray[index+1]))
 				{
 					currentMax++;
-					resultList.add(inputStringArray[i]);
+					resultList.add(inputStringArray[index]);
 					result = (String[]) resultList.toArray(new String[resultList.size()]);	
 				}
 				else
 				{
 					if(currentMax > max)
 					{
-						resultList.add(inputStringArray[i]);
+						resultList.add(inputStringArray[index]);
 						max = currentMax;
 						result = (String[]) resultList.toArray(new String[resultList.size()]);
 						resultList.clear();
@@ -113,12 +111,12 @@ public class AnagramChecker {
 			}
 		}
 		if(result.length == 1)
-			result = null;
+			result = new String[0];
 		return result;
 	}
 	
 	/**
-	 * 
+	 * This method finds the largest group of anagrams in a File. Returns an empty array if no anagrams are present.
 	 * @param filename
 	 * @return
 	 * @throws FileNotFoundException 
@@ -127,22 +125,22 @@ public class AnagramChecker {
 	{
 		ArrayList<String> result = new ArrayList<String>();
 		File file;
-		Scanner s;
+		Scanner scn;
 		try
 		{
 			file = new File(filename);
-			s = new Scanner(file);
+			scn = new Scanner(file);
 		}
 		catch(FileNotFoundException e)
 		{
-			return null;
+			return new String[0];
 		}
 		
-		while(s.hasNext())
+		while(scn.hasNext())
 		{
-			result.add(s.next());
+			result.add(scn.next());
 		}
-		s.close();
+		scn.close();
 		
 		return getLargestAnagramGroup(result.toArray(new String[result.size()]));
 	}
@@ -154,17 +152,14 @@ public class AnagramChecker {
 			System.out.println(sort("cbaABDA"));
 			System.out.println(sort("yourS"));
 			System.out.println(areAnagrams("RonaldReagan","Adarnlongera"));
-			String [] arr = new String[6];
+			String [] arr = new String[4];
 			arr[0]="cba";
-			arr[1]="abc";
-			arr[2]="cbaABDA";
-			arr[3]="yourS";
-			arr[4]="anagrams";
-			arr[5]="bac";
+			//arr[1]="abc";
+			arr[1]="cbaABDA";
+			arr[2]="yourS";
+			arr[3]="anagrams";
+			//arr[5]="bac";
 			System.out.println(Arrays.toString(getLargestAnagramGroup(arr)));
-			String file = "src\\assign04\\sample_word_list.txt";
+			
 	}
-
-//Insertion sort application
-	//5 Methods
 }
