@@ -1,7 +1,11 @@
 package assign04;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Scanner;
 
 /**
  * 
@@ -84,31 +88,32 @@ public class AnagramChecker {
 		int currentMax = 1;
 		
 		insertionSort(inputStringArray,(a, b) ->sort(a).compareTo(sort(b)));
+		
 		if(inputStringArray.length > 0)
 		{
-			resultList.add(inputStringArray[0]);
-			for(int i = 1; i<inputStringArray.length; i++)
+			for(int i = 0; i<inputStringArray.length-1; i++)
 			{
-				if(areAnagrams(inputStringArray[i], inputStringArray[i-1]))
+				if(areAnagrams(inputStringArray[i], inputStringArray[i+1]))
 				{
 					currentMax++;
 					resultList.add(inputStringArray[i]);
-					resultList.add(inputStringArray[i-1]);
-					result = (String[]) resultList.toArray(new String[resultList.size()]);
-					
+					result = (String[]) resultList.toArray(new String[resultList.size()]);	
 				}
 				else
 				{
 					if(currentMax > max)
 					{
+						resultList.add(inputStringArray[i]);
 						max = currentMax;
 						result = (String[]) resultList.toArray(new String[resultList.size()]);
 						resultList.clear();
 					}
-					currentMax = 0;
+					currentMax = 1;
 				}
 			}
 		}
+		if(result.length == 1)
+			result = null;
 		return result;
 	}
 	
@@ -116,10 +121,30 @@ public class AnagramChecker {
 	 * 
 	 * @param filename
 	 * @return
+	 * @throws FileNotFoundException 
 	 */
-	public static String[] getLargestAnagramGroup(String filename) 
+	public static String[] getLargestAnagramGroup(String filename)
 	{
-		return null;
+		ArrayList<String> result = new ArrayList<String>();
+		File file;
+		Scanner s;
+		try
+		{
+			file = new File(filename);
+			s = new Scanner(file);
+		}
+		catch(FileNotFoundException e)
+		{
+			return null;
+		}
+		
+		while(s.hasNext())
+		{
+			result.add(s.next());
+		}
+		s.close();
+		
+		return getLargestAnagramGroup(result.toArray(new String[result.size()]));
 	}
 	
 	public static  <T> void main(String[] args) 
@@ -136,7 +161,8 @@ public class AnagramChecker {
 			arr[3]="yourS";
 			arr[4]="anagrams";
 			arr[5]="bac";
-			System.out.println(getLargestAnagramGroup(arr).toString());
+			System.out.println(Arrays.toString(getLargestAnagramGroup(arr)));
+			String file = "src\\assign04\\sample_word_list.txt";
 	}
 
 //Insertion sort application
