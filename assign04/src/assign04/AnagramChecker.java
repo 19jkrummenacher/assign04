@@ -1,5 +1,6 @@
 package assign04;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -77,30 +78,24 @@ public class AnagramChecker {
 	 */
 	public static String[] getLargestAnagramGroup(String[] inputStringArray) 
 	{
-		String [] copyTem =insertionSort(inputStringArray,);
-		String [][] result= null;
+		int result;
+		int valIndexer = 0;
 		
-		for(int i = 1; i<copyTem.length; i++)
+		insertionSort(inputStringArray,(a, b) ->sort(a).compareTo(sort(b)));
+
+		for(int i = 1; i<inputStringArray.length; i++)
 		{
-			for(int j = i-1; j>= result.length; j--)
+			if(areAnagrams(inputStringArray[i], inputStringArray[i-1]))
 			{
-				if(result[j] == null || areAnagrams(result[j][0], copyTem[i]))
-					result[j][result.length] = copyTem[i];
+				
+			}
+			else
+			{
+				valIndexer = i;
 			}
 		}
-		//result = {{"cat","act","cta"},{"at","ta"},null};
-		//check for largest length
-		int max = 0;
-		int tempInt = 0;
-		for(int i = 0; i<result.length; i++)
-		{
-			if(result[i].length > max)
-			{
-				max = result.length;
-				tempInt = i;
-			}
-		}
-		return result[tempInt];
+		//result = {{"cat","act","cta"},{"at","ta"}};
+		return null;
 	}
 	
 	/**
