@@ -27,7 +27,7 @@ public class AnagramChecker
 		if (inputString.equals(null))
 			throw new NullPointerException();
 		// Lowers the input string for comparison
-		inputString = inputString.toLowerCase();
+		//inputString = inputString.toLowerCase();
 		char targetVal;
 		char[] charArray = inputString.toCharArray();
 		int loopCounter;
@@ -95,7 +95,7 @@ public class AnagramChecker
 		int max = 0;
 		int currentMax = 1;
 
-		insertionSort(inputStringArray, (a, b) -> sort(a).compareTo(sort(b)));
+		insertionSort(inputStringArray, (a, b) -> sort(a.toLowerCase()).compareTo(sort(b.toLowerCase())));
 
 		if (inputStringArray.length > 0)
 		{
@@ -162,13 +162,16 @@ public class AnagramChecker
 		System.out.println(sort("cbaABDA"));
 		System.out.println(sort("yourS"));
 		System.out.println(areAnagrams("RonaldReagan", "Adarnlongera"));
-		String[] arr = new String[4];
-		arr[0] = "cba";
-		// arr[1]="abc";
-		arr[1] = "cbaABDA";
-		arr[2] = "yourS";
-		arr[3] = "anagrams";
-		// arr[5]="bac";
+		String[] arr = new String[7];
+		arr[0] = "abc";
+		arr[1] = "FHF";
+		arr[2] = "yoursfully";
+		arr[3] = "cba";
+		arr[4] = "cat";
+		arr[5] = "ab";
+		arr[6] = "ACDC";
+		//insertionSort(arr, (a, b) -> sort(a).compareTo(sort(b)));
+		
 		System.out.println(Arrays.toString(getLargestAnagramGroup(arr)));
 
 	}

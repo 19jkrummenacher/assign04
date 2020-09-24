@@ -39,7 +39,7 @@ class AnagramCheckerTester
 		midList[9] = "lsat";
 
 		s1 = "racecar";
-		comp = (a, b) -> AnagramChecker.sort((String) a).compareTo(d.sort((String) b));
+		comp = ( a, b) -> ((String) a).compareTo((String) b);
 	}
 
 	/**
@@ -80,7 +80,7 @@ class AnagramCheckerTester
 	@Test
 	void insertionSort_smallList()
 	{
-		d.insertionSort(smallList, comp);
+		AnagramChecker.insertionSort(smallList, comp);
 		String[] key = new String[5];
 		
 		key[0] = "act";
@@ -89,7 +89,7 @@ class AnagramCheckerTester
 		key[3] = "teh";
 		key[4] = "the";		
 		
-		assertEquals(smallList.toString(), key.toString());
+		assertArrayEquals(smallList, key);
 	}
 	
 	/**
@@ -98,8 +98,8 @@ class AnagramCheckerTester
 	@Test
 	void insertionSort_midList()
 	{
-		d.insertionSort(midList, comp);
-		String[] key = new String[5];
+		
+		String[] key = new String[10];
 		
 		key[0] = "act";
 		key[1] = "cat";
@@ -111,12 +111,12 @@ class AnagramCheckerTester
 		key[7] = "your";
 		key[8] = "CAT";
 		key[9] = "ACDC";
-		
-		assertEquals(midList.toString(), key.toString());
+		AnagramChecker.insertionSort(midList, comp);	
+		assertEquals(midList, key);
 	}
 
 	/**
-	 * 
+	 * Testing for Null parameter handling
 	 */
 	@Test
 	void insertionSort_NullInput()
@@ -130,14 +130,14 @@ class AnagramCheckerTester
 	@Test
 	void areAnagrams_EmptyString()
 	{
-		assertFalse(AnagramChecker.areAnagrams("cart",""));
+		assertFalse(AnagramChecker.areAnagrams(s1,""));
 	}
 	
 	/**
 	 * 
 	 */
 	@Test
-	void areAnagrams_arentAnagrams()
+	void areAnagrams_NoAnagrams()
 	{
 		assertFalse(AnagramChecker.areAnagrams("cart","meep"));
 	}
