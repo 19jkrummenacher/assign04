@@ -2,6 +2,7 @@ package assign04;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 class AnagramCheckerTester
 {
 	private String s1, s2;
-	private String[] smallList, emptyList, midList;
+	private String[] smallList, emptyList, midList, nullList;
 	private AnagramChecker d;
 	private Comparator comp;
 
@@ -18,6 +19,7 @@ class AnagramCheckerTester
 	public void setUp()
 	{
 		smallList = new String[5];
+		nullList = null;
 		emptyList = new String[0];
 		midList = new String[10];
 
@@ -99,20 +101,11 @@ class AnagramCheckerTester
 	void insertionSort_midList()
 	{
 		
-		String[] key = new String[10];
+		String[] key = midList.clone();
+		Arrays.sort(key);
 		
-		key[0] = "act";
-		key[1] = "cat";
-		key[2] = "dcad";
-		key[3] = "meep";
-		key[4] = "mepE";
-		key[5] = "moop";
-		key[6] = "lsat";
-		key[7] = "your";
-		key[8] = "CAT";
-		key[9] = "ACDC";
 		AnagramChecker.insertionSort(midList, comp);	
-		assertEquals(midList, key);
+		assertArrayEquals(midList, key);
 	}
 
 	/**
@@ -137,7 +130,7 @@ class AnagramCheckerTester
 	 * 
 	 */
 	@Test
-	void areAnagrams_NoAnagrams()
+	void areAnagrams_noAnagrams()
 	{
 		assertFalse(AnagramChecker.areAnagrams("cart","meep"));
 	}
@@ -159,5 +152,76 @@ class AnagramCheckerTester
 	{
 		assertThrows(NullPointerException.class, () -> {AnagramChecker.areAnagrams(null, null);});
 	}
-
+	
+	/**
+	 * 
+	 */
+	@Test
+	void getLargestAnagramGroup_NullPoint()
+	{
+		assertThrows(NullPointerException.class, () -> {AnagramChecker.getLargestAnagramGroup(nullList);});
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	void getLargestAnagramGroup_Tie()
+	{
+		
+		String[] key = new String[2];
+		
+		key[0] = "act";
+		key[1] = "cat";
+		Arrays.sort(key);
+		String[] answer = AnagramChecker.getLargestAnagramGroup(smallList);
+		Arrays.sort(answer);
+		assertArrayEquals(key, answer);
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	void getLargestAnagramGroup_OneGroup()
+	{
+		
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	void getLargestAnagramGroup_TwoGroup()
+	{
+		
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	void getLargestAnagramGroup_ThreeGroup()
+	{
+		
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	void getLargestAnagramGroup_EmptyGroup()
+	{
+		
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	void getLargestAnagramGroupFile_NullPoint()
+	{
+		
+	}
+	
 }

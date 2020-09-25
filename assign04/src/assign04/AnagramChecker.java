@@ -78,7 +78,7 @@ public class AnagramChecker
 	 */
 	public static boolean areAnagrams(String inputString, String secondInputString)
 	{
-		return sort(inputString).equals(sort(secondInputString));
+		return sort(inputString.toLowerCase()).equals(sort(secondInputString.toLowerCase()));
 	}
 
 	/**
@@ -105,8 +105,9 @@ public class AnagramChecker
 				{
 					currentMax++;
 					resultList.add(inputStringArray[index]);
-					result = (String[]) resultList.toArray(new String[resultList.size()]);
-				} else
+					//result = (String[]) resultList.toArray(new String[resultList.size()]);
+				} 
+				else
 				{
 					if (currentMax > max)
 					{
