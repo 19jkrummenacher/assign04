@@ -105,7 +105,11 @@ public class AnagramChecker
 				{
 					currentMax++;
 					resultList.add(inputStringArray[index]);
-					//result = (String[]) resultList.toArray(new String[resultList.size()]);
+					if(inputStringArray.length - 2 == index && currentMax > max)
+					{
+						resultList.add(inputStringArray[index + 1]);
+						result = (String[]) resultList.toArray(new String[resultList.size()]);
+					}
 				} 
 				else
 				{
@@ -114,8 +118,9 @@ public class AnagramChecker
 						resultList.add(inputStringArray[index]);
 						max = currentMax;
 						result = (String[]) resultList.toArray(new String[resultList.size()]);
-						resultList.clear();
+						
 					}
+					resultList.clear();
 					currentMax = 1;
 				}
 			}

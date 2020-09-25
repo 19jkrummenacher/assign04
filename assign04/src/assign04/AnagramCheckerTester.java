@@ -247,16 +247,52 @@ class AnagramCheckerTester
 	@Test
 	void getLargestAnagramGroup_ThreeGroup()
 	{
+		String[] answer = new String[10];
+		String[] key = new String[3];
 		
+		answer[0] = "allergy";
+		answer[1] = "arts";
+		answer[2] = "star";
+		answer[3] = "gallery";
+		answer[4] = "thanks";	
+		answer[5] = "rats";
+		answer[6] = "rat";
+		answer[7] = "baker";
+		answer[8] = "brake";
+		answer[9] = "";
+		
+		key[0] = "star";
+		key[1] = "rats";
+		key[2] = "arts";
+				
+		
+		String[] result = AnagramChecker.getLargestAnagramGroup(answer);
+		
+		Arrays.sort(key);
+		Arrays.sort(result);
+		
+		assertArrayEquals(key, result);
 	}
 	
 	/**
 	 * 
 	 */
 	@Test
-	void getLargestAnagramGroup_EmptyGroup()
+	void getLargestAnagramGroup_NoAnagrams()
 	{
+		String[] answer = new String[6];
+		String[] key = new String[0];
 		
+		answer[0] = "allrgy";
+		answer[1] = "meh";
+		answer[2] = "meep";
+		answer[3] = "gallery";
+		answer[4] = "thanks";	
+		answer[5] = "t";
+		
+		String[] result = AnagramChecker.getLargestAnagramGroup(answer);
+		
+		assertArrayEquals(key, result);
 	}
 	
 	/**
