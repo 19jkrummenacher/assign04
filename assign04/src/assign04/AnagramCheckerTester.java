@@ -8,6 +8,11 @@ import java.util.Comparator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * 
+ * @author Dixit && Krummenacher
+ *
+ */
 class AnagramCheckerTester
 {
 	private String s1, s2;
@@ -185,6 +190,25 @@ class AnagramCheckerTester
 	@Test
 	void getLargestAnagramGroup_OneGroup()
 	{
+		String[] answer = new String[6];
+		String[] key = new String[2];
+		
+		answer[0] = "allergy";
+		answer[1] = "meh";
+		answer[2] = "meep";
+		answer[3] = "gallery";
+		answer[4] = "thanks";	
+		answer[5] = "t";
+		
+		key[0] = "allergy";
+		key[1] = "gallery";
+		
+		String[] result = AnagramChecker.getLargestAnagramGroup(answer);
+		
+		Arrays.sort(key);
+		Arrays.sort(result);
+		
+		assertArrayEquals(key, result);
 		
 	}
 	
@@ -194,7 +218,27 @@ class AnagramCheckerTester
 	@Test
 	void getLargestAnagramGroup_TwoGroup()
 	{
+		String[] answer = new String[6];
+		String[] key = new String[3];
 		
+		answer[0] = "allergy";
+		answer[1] = "arts";
+		answer[2] = "star";
+		answer[3] = "gallery";
+		answer[4] = "thanks";	
+		answer[5] = "rats";
+		
+		key[0] = "star";
+		key[1] = "rats";
+		key[2] = "arts";
+				
+		
+		String[] result = AnagramChecker.getLargestAnagramGroup(answer);
+		
+		Arrays.sort(key);
+		Arrays.sort(result);
+		
+		assertArrayEquals(key, result);
 	}
 	
 	/**

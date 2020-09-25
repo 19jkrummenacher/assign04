@@ -123,6 +123,7 @@ public class AnagramChecker
 		if (result.length == 1)
 			result = new String[0];
 		return result;
+
 	}
 
 	/**
