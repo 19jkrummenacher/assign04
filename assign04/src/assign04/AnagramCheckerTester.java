@@ -2,6 +2,7 @@ package assign04;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -15,9 +16,8 @@ import org.junit.jupiter.api.Test;
  */
 class AnagramCheckerTester
 {
-	private String s1, s2;
+	private String s1;
 	private String[] smallList, emptyList, midList, nullList;
-	private AnagramChecker d;
 	private Comparator comp;
 
 	@BeforeEach
@@ -55,7 +55,7 @@ class AnagramCheckerTester
 	@Test
 	void sort_Small()
 	{
-		String result = d.sort(s1);
+		String result = AnagramChecker.sort(s1);
 		assertEquals(result, "aaccerr");
 
 	}
@@ -66,7 +66,7 @@ class AnagramCheckerTester
 	@Test
 	void sort_EmptyString()
 	{
-		String result = d.sort("");
+		String result = AnagramChecker.sort("");
 		assertEquals(result, "");
 	}
 
@@ -77,12 +77,13 @@ class AnagramCheckerTester
 	void sort_NullInput()
 	{
 		assertThrows(NullPointerException.class, () -> {
-			d.sort(null);
+			AnagramChecker.sort(null);
 		});
 	}
 
 	/**
-	 * 
+	 * Checks insertion sort with a small size array with comparator
+
 	 */
 	@Test
 	void insertionSort_smallList()
@@ -100,7 +101,7 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 * Checks insertion sort with a mid size array with comparator
 	 */
 	@Test
 	void insertionSort_midList()
@@ -119,11 +120,11 @@ class AnagramCheckerTester
 	@Test
 	void insertionSort_NullInput()
 	{
-		assertThrows(NullPointerException.class, () -> {d.insertionSort(null, null);});
+		assertThrows(NullPointerException.class, () -> {AnagramChecker.insertionSort(null, null);});
 	}
 	
 	/**
-	 * 
+	 * This method checks the handling of empty strings
 	 */
 	@Test
 	void areAnagrams_EmptyString()
@@ -132,7 +133,7 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 * This tests are Anagrams ability to handle no anagrams
 	 */
 	@Test
 	void areAnagrams_noAnagrams()
@@ -141,7 +142,7 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 * This tests are Anagrams ability to handle a pair of anagrams
 	 */
 	@Test
 	void areAnagrams_areAnagrams()
@@ -150,7 +151,7 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 * This tests are Anagrams ability to handle null agruements
 	 */
 	@Test
 	void areAnagrams_NullInput()
@@ -159,7 +160,7 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 * This tests getLargestAnagramGroup ability to handle null agruements
 	 */
 	@Test
 	void getLargestAnagramGroup_NullPoint()
@@ -168,7 +169,7 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 * This tests getLargestAnagramGroup ability to handle a tie in Anagram groups
 	 */
 	@Test
 	void getLargestAnagramGroup_Tie()
@@ -185,7 +186,7 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 * This tests getLargestAnagramGroup ability to handle one groups of anagrams
 	 */
 	@Test
 	void getLargestAnagramGroup_OneGroup()
@@ -213,7 +214,7 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 * This tests getLargestAnagramGroup ability to handle two groups of anagrams
 	 */
 	@Test
 	void getLargestAnagramGroup_TwoGroup()
@@ -242,7 +243,7 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 * This tests getLargestAnagramGroup ability to handle three groups of anagrams
 	 */
 	@Test
 	void getLargestAnagramGroup_ThreeGroup()
@@ -275,7 +276,7 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 *  This tests when there are no matches
 	 */
 	@Test
 	void getLargestAnagramGroup_NoAnagrams()
@@ -296,12 +297,70 @@ class AnagramCheckerTester
 	}
 	
 	/**
-	 * 
+	 * This tests getLargestAnagramGroup ability to handle a bunch of Anagrams
 	 */
 	@Test
-	void getLargestAnagramGroupFile_NullPoint()
+	void getLargestAnagramGroupFile_SampleWordList()
 	{
+		String[] answer = { "carets", "Caters", "caster", "crates", "Reacts", "recast", "traces" };
+		String[] result = AnagramChecker.getLargestAnagramGroup("src/assign04/sample_word_list.txt");
 		
+		Arrays.sort(answer);
+		Arrays.sort(result);
+		
+		assertArrayEquals(answer, result);
+		
+	}
+	
+	/**
+	 * This tests getLargestAnagramGroup ability to find the only set of anagrams in one_Angarams.txt
+	 */
+	@Test
+	void getLargestAnagramGroupFile_oneAnagram()
+	{
+		String[] answer = { "lame", "meal", "male" };
+		String[] result = AnagramChecker.getLargestAnagramGroup("src/assign04/one_Anagram.txt");
+		
+		Arrays.sort(answer);
+		Arrays.sort(result);
+		
+		assertArrayEquals(answer, result);
+		
+	}
+	
+	/**
+	 * This tests  getLargestAnagramGroup to find no matching anagrams in a file.
+	 */
+	@Test
+	void getLargestAnagramGroupFile_NoAnagram()
+	{
+		String[] answer = {};
+		String[] result = AnagramChecker.getLargestAnagramGroup("src/assign04/No_Anagram.txt");
+		
+		assertArrayEquals(answer, result);
+		
+	}
+	
+	/**
+	 * This tests when getLargestAnagramGroup is given an empty file
+	 */
+	@Test
+	void getLargestAnagramGroupFile_EmptyFile()
+	{
+		String[] answer = {};
+		String[] result = AnagramChecker.getLargestAnagramGroup("src/assign04/emptyFile.txt");
+		
+		assertArrayEquals(answer, result);
+	}
+	
+	/**
+	 * This tests the getLargest ability when there's no file there
+	 */
+	@Test
+	void getLargestAnagramGroupFile_NoFile()
+	{
+		String[] result = {};
+		assertArrayEquals(AnagramChecker.getLargestAnagramGroup("src/assign04/sam.txt"), result);
 	}
 	
 }

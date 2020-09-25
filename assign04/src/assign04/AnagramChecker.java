@@ -56,10 +56,11 @@ public class AnagramChecker
 	{
 		T key;
 		int loopIndex;
+		//start of the insertion loop
 		for (int index = 1; index < inputArr.length; index++)
 		{
 			key = inputArr[index];
-
+			//adds key into sorted part of the array
 			for (loopIndex = index - 1; loopIndex >= 0 && inputComp.compare(inputArr[loopIndex], key) > 0; loopIndex--)
 			{
 				inputArr[loopIndex + 1] = inputArr[loopIndex];
@@ -91,7 +92,7 @@ public class AnagramChecker
 	public static String[] getLargestAnagramGroup(String[] inputStringArray)
 	{
 		ArrayList<String> resultList = new ArrayList<String>();
-		String[] result = null;
+		String[] result = {};//if no elements getLergestAnagramGroup will return this.
 		int max = 0;
 		int currentMax = 1;
 
@@ -100,11 +101,12 @@ public class AnagramChecker
 		if (inputStringArray.length > 0)
 		{
 			for (int index = 0; index < inputStringArray.length - 1; index++)
-			{
+			{//checks that the current and next index are the same
 				if (areAnagrams(inputStringArray[index], inputStringArray[index + 1]))
 				{
 					currentMax++;
 					resultList.add(inputStringArray[index]);
+					//does a final check for max if its the last element
 					if(inputStringArray.length - 2 == index && currentMax > max)
 					{
 						resultList.add(inputStringArray[index + 1]);
@@ -148,11 +150,11 @@ public class AnagramChecker
 		{
 			file = new File(filename);
 			scn = new Scanner(file);
-		} catch (FileNotFoundException e)
+		} catch (FileNotFoundException e) // checks that the file exists
 		{
 			return new String[0];
 		}
-
+		//assembles the array from the file
 		while (scn.hasNext())
 		{
 			result.add(scn.next());
@@ -162,24 +164,4 @@ public class AnagramChecker
 		return getLargestAnagramGroup(result.toArray(new String[result.size()]));
 	}
 
-	public static <T> void main(String[] args)
-	{
-		System.out.println(sort("abc"));
-		System.out.println(sort("cba"));
-		System.out.println(sort("cbaABDA"));
-		System.out.println(sort("yourS"));
-		System.out.println(areAnagrams("RonaldReagan", "Adarnlongera"));
-		String[] arr = new String[7];
-		arr[0] = "abc";
-		arr[1] = "FHF";
-		arr[2] = "yoursfully";
-		arr[3] = "cba";
-		arr[4] = "cat";
-		arr[5] = "ab";
-		arr[6] = "ACDC";
-		//insertionSort(arr, (a, b) -> sort(a).compareTo(sort(b)));
-		
-		System.out.println(Arrays.toString(getLargestAnagramGroup(arr)));
-
-	}
 }
